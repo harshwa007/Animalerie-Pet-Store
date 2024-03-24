@@ -30,7 +30,7 @@ namespace Backend.Controllers
             await _context.Products.AddAsync(newProduct);
             await _context.SaveChangesAsync();
             return Ok("Product Added Successfully");
-       
+
         }
         //Read
         [HttpGet]
@@ -40,11 +40,51 @@ namespace Backend.Controllers
             return Ok(Products);
         }
 
+        //GetById
         [HttpGet]
         [Route("{id}")]
         public async Task<ActionResult<ProductEntity>> GetProductByID([FromRoute] long id)
         {
+            var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
 
+            if (product is null)
+            {
+                return NotFound("Product not found");
+            }
+            return Ok(product);
+        }
+
+        //update
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> UpdateProduct([FromRoute] long id, [FromBody] CreateUpdateProductDto dto)
+        {
+            var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (product is null)
+            {
+                return NotFound("Product not found");
+            }
+            product.Title = dto.Title;
+            product.Brand = dto.Brand;
+            product.UpdatedAt = DateTime.Now;
+            await _context.SaveChangesAsync();
+            return Ok("Product Update Successfully");
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteProduct([FromRoute] long id)
+        {
+            var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (product is null)
+            {
+                return NotFound("Product not found");
+            }
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
+            return Ok("Product Delete Successfully");
         }
     }
 }

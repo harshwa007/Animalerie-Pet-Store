@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6516b2c2.css",
+    "main.js": "/static/js/main.0776ee55.js",
+    "static/media/petshop.jpg": "/static/media/petshop.0f5b0a8e629c932547d8.jpg",
+    "index.html": "/index.html",
+    "main.6516b2c2.css.map": "/static/css/main.6516b2c2.css.map",
+    "main.0776ee55.js.map": "/static/js/main.0776ee55.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6516b2c2.css",
+    "static/js/main.0776ee55.js"
+  ]
+}
